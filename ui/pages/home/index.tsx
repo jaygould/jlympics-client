@@ -7,7 +7,7 @@ import GlobalStatus from '../../components/globalStatus';
 import Header from '../../components/head';
 const css = require('./index.scss');
 
-import apiUrl from '../../config';
+import config from '../../config';
 import authService from '../../services/auth.service';
 import { ILoginIn } from '../../types/auth.types';
 import { IGlobalStatus } from '../../types/global.types';
@@ -76,7 +76,7 @@ function Home(props: IProps) {
 			</div>
 			<div>
 				Click{' '}
-				<Link href={`${apiUrl}/auth/facebook`}>
+				<Link href={`${config.apiUrl}/auth/facebook`}>
 					<a>here</a>
 				</Link>{' '}
 				to login with Facebook
