@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import Router from 'next/router';
 import Cookies from 'universal-cookie';
 import fetchService from './fetch.service';
@@ -36,14 +37,19 @@ class AuthService {
 	public logout(): void {
 		const cookies = new Cookies();
 		cookies.remove('authToken');
+		cookies.remove('fbJwt');
 		Router.push('/home');
 		return;
 	}
 
-	public parseJwt(token: string) {
-		const base64Url = token.split('.')[1];
-		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-		return JSON.parse(window.atob(base64));
+	public parseJwt(token: string, isServer: any) {
+		if (isServer) {
+			return jwt.decode(token);
+		} else {
+			const base64Url = token.split('.')[1];
+			const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			return JSON.parse(window.atob(base64));
+		}
 	}
 
 	public redirectUser(dest: string, options: IRedirectOptions) {
@@ -64,7 +70,12 @@ class AuthService {
 	}
 
 	public isAuthPage(page: string) {
-		if (page === '/home' || page === '/register' || page === '/about') {
+		if (
+			page === '/home' ||
+			page === '/register' ||
+			page === '/about' ||
+			page === '/authed-fb'
+		) {
 			return false;
 		} else {
 			return true;

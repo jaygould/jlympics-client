@@ -3,6 +3,12 @@ import { StatusConsumer } from '../services/status.context';
 
 const GlobalStatus = (AppComponent: any) =>
 	class AppWrapComponent extends Component {
+		static getInitialProps(ctx: any) {
+			// required to pass down the initial props to the child component
+			if (AppComponent.getInitialProps) {
+				return AppComponent.getInitialProps(ctx);
+			}
+		}
 		constructor(props: any) {
 			super(props);
 			this.state = {};
@@ -12,7 +18,7 @@ const GlobalStatus = (AppComponent: any) =>
 		render() {
 			return (
 				<StatusConsumer>
-					{context => <AppComponent globalStatus={context} />}
+					{context => <AppComponent {...this.props} globalStatus={context} />}
 				</StatusConsumer>
 			);
 		}

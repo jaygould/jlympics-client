@@ -49,7 +49,7 @@ describe('Login and register', () => {
 	});
 	it('creates and parses a valid jwt', () => {
 		const tokenPayload: any = jwt.verify(fakeToken, fakeTokenSecret);
-		expect(AuthService.parseJwt(fakeToken)).not.toBeFalsy();
+		expect(AuthService.parseJwt(fakeToken, false)).not.toBeFalsy();
 		expect(tokenPayload.ilove).toContain(fakeTokenValue);
 	});
 });
