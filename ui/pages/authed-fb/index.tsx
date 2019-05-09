@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as React from 'react';
 import Cookies from 'universal-cookie';
 
@@ -5,6 +6,8 @@ import GlobalStatus from '../../components/globalStatus';
 import Header from '../../components/head';
 import authService from '../../services/auth.service';
 const css = require('./index.scss');
+
+import config from '../../config';
 
 function AuthedFb(props: any) {
 	const { thisUser } = props.pageProps;
@@ -15,6 +18,22 @@ function AuthedFb(props: any) {
 				You have logged in successfully as{' '}
 				{thisUser.displayName ? thisUser.displayName : 'a Facebook user'}!
 			</h2>
+
+			{thisUser.fitbit ? (
+				<div>
+					<p>You are connected to your Fitbit account:</p>
+					<img src={thisUser.fitbit.fitbitAvatar} />
+					<p>Fitbit Name: {thisUser.fitbit.fitbitName}</p>
+				</div>
+			) : (
+				<div>
+					Click{' '}
+					<Link href={`${config.apiUrl}/auth/fitbit`}>
+						<a>here</a>
+					</Link>{' '}
+					to login with Fitbit
+				</div>
+			)}
 		</div>
 	);
 }
