@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from '../../components/head';
 const css = require('./index.scss');
 
-import GlobalStatus from '../../components/globalStatus';
+import GlobalStatus from '../../components/HocGlobalStatus';
 
 import { Field, Form, Formik, FormikActions } from 'formik';
 import authService from '../../services/auth.service';

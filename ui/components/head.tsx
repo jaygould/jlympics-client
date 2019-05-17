@@ -1,9 +1,17 @@
 import Head from 'next/head';
 import * as React from 'react';
-import authService from '../services/auth.service';
-import { StatusConsumer } from '../services/status.context';
 
-function Header() {
+import GlobalAuth from './HocGlobalAuth';
+
+import { StatusConsumer } from '../services/status.context';
+import { IGlobalAuth } from '../types/global.types';
+
+interface IProps {
+	globalAuth: IGlobalAuth;
+}
+
+function Header(props: IProps) {
+	const { globalAuth } = props;
 	return (
 		<div>
 			<StatusConsumer>
@@ -13,7 +21,23 @@ function Header() {
 					) : null;
 				}}
 			</StatusConsumer>
-			<button onClick={() => authService.logout()}>Log out</button>
+
+			{globalAuth.isLoggedIn && globalAuth.user ? (
+				<div>
+					<p>
+						Logged in with user:{' '}
+						{globalAuth.user.email || globalAuth.user.displayName}
+					</p>
+					<button
+						onClick={() => {
+							globalAuth.logout();
+						}}
+					>
+						Log out
+					</button>
+				</div>
+			) : null}
+
 			<Head>
 				<title>My page title</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -24,4 +48,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default GlobalAuth(Header);

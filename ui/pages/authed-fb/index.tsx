@@ -1,18 +1,22 @@
+const css = require('./index.scss');
+
 import Link from 'next/link';
 import * as React from 'react';
 
-import GlobalStatus from '../../components/globalStatus';
 import Header from '../../components/head';
+import GlobalAuth from '../../components/HocGlobalAuth';
+import GlobalStatus from '../../components/HocGlobalStatus';
 import authService from '../../services/auth.service';
 import fitbitService from '../../services/fitbit.service';
-const css = require('./index.scss');
+import { IGlobalAuth } from '../../types/global.types';
 
 import config from '../../config';
 
-class AuthedFb extends React.Component<
-	{ pageProps: any },
-	{ isActive: boolean }
-> {
+interface IProps {
+	globalAuth: IGlobalAuth;
+	pageProps: any;
+}
+class AuthedFb extends React.Component<IProps, { isActive: boolean }> {
 	static async getInitialProps(ctx: any) {
 		const fbJwt: any = authService.fbJwtMiddleware(ctx);
 		if (fbJwt) {
@@ -39,9 +43,17 @@ class AuthedFb extends React.Component<
 		};
 	}
 	componentDidMount() {
+		const { globalAuth, pageProps } = this.props;
 		this.setState({
 			isActive: this.props.pageProps.fitbitData.isActive
 		});
+		setTimeout(() => {
+			// settimeout is needed to run the addUserDetails function after the authContext
+			// is rendered in the HoC.
+			globalAuth.addUserDetails({
+				displayName: pageProps.thisUser.displayName
+			});
+		}, 0);
 	}
 	updateActiveStatus(fitbitId: any, activeStatus: any) {
 		fitbitService.updateFitbitStatus(fitbitId, activeStatus).then(() => {
@@ -49,22 +61,24 @@ class AuthedFb extends React.Component<
 		});
 	}
 	render() {
-		const { thisUser, fitbitData } = this.props.pageProps;
+		const { pageProps } = this.props;
 		const { isActive } = this.state;
 		return (
 			<div>
 				<Header />
 				<h2 className={css.example}>
 					You have logged in successfully as{' '}
-					{thisUser.displayName ? thisUser.displayName : 'a Facebook user'}!
+					{pageProps.thisUser.displayName
+						? pageProps.thisUser.displayName
+						: 'a Facebook user'}
+					!
 				</h2>
-
-				{thisUser.fitbit ? (
+				{pageProps.thisUser.fitbit ? (
 					<div>
 						<div>
 							<p>You are connected to your Fitbit account:</p>
-							<img src={thisUser.fitbit.fitbitAvatar} />
-							<p>Fitbit Name: {thisUser.fitbit.fitbitName}</p>
+							<img src={pageProps.thisUser.fitbit.fitbitAvatar} />
+							<p>Fitbit Name: {pageProps.thisUser.fitbit.fitbitName}</p>
 						</div>
 						<div>
 							{isActive ? (
@@ -76,7 +90,7 @@ class AuthedFb extends React.Component<
 											href="#"
 											onClick={e => {
 												e.preventDefault();
-												this.updateActiveStatus(thisUser.fitbit.fitbitId, false);
+												this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, false);
 											}}
 										>
 											Click here
@@ -93,7 +107,7 @@ class AuthedFb extends React.Component<
 											href="#"
 											onClick={e => {
 												e.preventDefault();
-												this.updateActiveStatus(thisUser.fitbit.fitbitId, true);
+												this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, true);
 											}}
 										>
 											Click here
@@ -117,5 +131,4 @@ class AuthedFb extends React.Component<
 		);
 	}
 }
-
-export default GlobalStatus(AuthedFb);
+export default GlobalAuth(GlobalStatus(AuthedFb));
