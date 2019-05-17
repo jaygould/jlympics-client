@@ -81,5 +81,29 @@ class AuthService {
 			return true;
 		}
 	}
+
+	public removeCookie(ctx: any, cookie: any) {
+		const isServer = ctx.req;
+		const cookies = new Cookies(isServer ? ctx.req.headers.cookie : null);
+		cookies.remove(ctx, cookie);
+	}
+
+	public fbJwtMiddleware(ctx: any) {
+		let fbJwt: any;
+		const isServer = ctx.req;
+		// get the previously set cookie if we are coming from another request other than
+		// the fbAuth callback, so the user doesn't have to log in with facebook each time
+		const cookies = new Cookies(isServer ? ctx.req.headers.cookie : null);
+		const cookiefbJwt = cookies.get('fbJwt');
+
+		if (isServer && ctx.query.fbJwt) {
+			// get fbJwt from URL and use it to create a cookie for access later
+			fbJwt = ctx.query.fbJwt;
+			ctx.res.cookie('fbJwt', fbJwt);
+		}
+
+		fbJwt = fbJwt || cookiefbJwt;
+		return fbJwt;
+	}
 }
 export default new AuthService();

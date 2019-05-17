@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import * as React from 'react';
-import Cookies from 'universal-cookie';
 
 import GlobalStatus from '../../components/globalStatus';
 import Header from '../../components/head';
@@ -10,28 +9,12 @@ const css = require('./index.scss');
 
 import config from '../../config';
 
-// TODO: refactor this page so some of the logic is abstracted (mainly from the getiniitalprops)
-// TODO: then show the user's fitbit stats in a table in their dash and the public dash if they active
-
 class AuthedFb extends React.Component<
 	{ pageProps: any },
 	{ isActive: boolean }
 > {
 	static async getInitialProps(ctx: any) {
-		let fbJwt: any;
-		const isServer = ctx.req;
-		// get the previously set cookie if we are coming from another request other than
-		// the fbAuth callback, so the user doesn't have to log in with facebook each time
-		const cookies = new Cookies(isServer ? ctx.req.headers.cookie : null);
-		const cookiefbJwt = cookies.get('fbJwt');
-
-		if (isServer && ctx.query.fbJwt) {
-			// get fbJwt from URL and use it to create a cookie for access later
-			fbJwt = ctx.query.fbJwt;
-			ctx.res.cookie('fbJwt', fbJwt);
-		}
-
-		fbJwt = fbJwt || cookiefbJwt;
+		const fbJwt: any = authService.fbJwtMiddleware(ctx);
 		if (fbJwt) {
 			// user is either coming from fb callback with token in url, or has token in their cookie
 			const resp = await authService.checkAuthToken(fbJwt).then(async auth => {
@@ -40,7 +23,7 @@ class AuthedFb extends React.Component<
 					const fitbitData = await fitbitService.getUserFitbitData(thisUser.fbId);
 					return { query: ctx.query, thisUser, fitbitData };
 				} else {
-					cookies.remove('fbJwt');
+					authService.removeCookie(ctx, 'fbJwt');
 					authService.redirectUser('/home', { ctx, status: 301 });
 				}
 			});
