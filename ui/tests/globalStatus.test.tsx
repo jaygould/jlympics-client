@@ -4,7 +4,7 @@ import React from 'react';
 import AuthService from '../services/auth.service';
 
 import GlobalStatus from '../components/HocGlobalStatus';
-import Home from '../pages/home/index';
+import Home from '../pages/admin-login/index';
 
 const incorrectUserDetails: any = {
 	email: '--',

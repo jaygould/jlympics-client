@@ -52,14 +52,14 @@ MyApp.getInitialProps = async ({ Component, ctx }: IAppContext) => {
 			.then(auth => {
 				if (path === '/') {
 					if (auth.success) {
-						authService.redirectUser('/dashboard', { ctx, status: 301 });
+						authService.redirectUser('/admin-dashboard', { ctx, status: 301 });
 					} else {
 						cookies.remove('authToken');
 						authService.redirectUser('/home', { ctx, status: 301 });
 					}
 				} else if (path === '/home') {
 					if (auth.success) {
-						authService.redirectUser('/dashboard', { ctx, status: 301 });
+						authService.redirectUser('/admin-dashboard', { ctx, status: 301 });
 					} else {
 						return { ...pageProps, ...{ query: ctx.query, authToken } };
 					}

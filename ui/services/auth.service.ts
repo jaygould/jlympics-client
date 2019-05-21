@@ -70,15 +70,10 @@ class AuthService {
 	}
 
 	public isAuthPage(page: string) {
-		if (
-			page === '/home' ||
-			page === '/register' ||
-			page === '/about' ||
-			page === '/authed-fb'
-		) {
-			return false;
-		} else {
+		if (page === '/admin-dashboard') {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
