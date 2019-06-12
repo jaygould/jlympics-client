@@ -4,6 +4,13 @@ class FitbitService {
 	public getUserFitbitData(fbId: any): Promise<any> {
 		return fetchService.isofetch(`/auth/fitbit/get-user-data`, { fbId }, 'POST');
 	}
+	public getActiveUsersFitbitData(): Promise<any> {
+		return fetchService.isofetch(
+			`/auth/fitbit/get-active-users-data`,
+			{},
+			'POST'
+		);
+	}
 	public updateFitbitStatus(fitbitId: any, activeUpdate: boolean): Promise<any> {
 		return fetchService.isofetch(
 			`/auth/fitbit/update-active-status`,
