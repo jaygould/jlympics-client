@@ -28,9 +28,9 @@ class AuthedFb extends React.Component<IProps, IState> {
 			const resp = await authService.checkAuthToken(fbJwt).then(async auth => {
 				if (auth.success) {
 					const thisUser = authService.parseJwt(fbJwt, true);
-					const userData = await fitbitService.getUserFitbitData(thisUser.fbId);
+					const fitbitData = await fitbitService.getUserFitbitData(thisUser.fbId);
 					const currentMonth = new Date().getMonth();
-					return { query: ctx.query, thisUser, userData, currentMonth };
+					return { query: ctx.query, thisUser, fitbitData, currentMonth };
 				} else {
 					authService.removeCookie(ctx, 'fbJwt');
 					authService.redirectUser('/home', { ctx, status: 301 });
@@ -49,7 +49,7 @@ class AuthedFb extends React.Component<IProps, IState> {
 	}
 	componentDidMount() {
 		const { globalAuth, pageProps } = this.props;
-		const isActive = pageProps.userData.isActive;
+		const isActive = pageProps.fitbitData.isActive;
 		this.setState({
 			isActive
 		});
@@ -124,7 +124,7 @@ class AuthedFb extends React.Component<IProps, IState> {
 							)}
 						</div>
 						<FitnessTable
-							fitbitData={pageProps.userData}
+							fitbitData={pageProps.fitbitData}
 							currentMonth={pageProps.currentMonth}
 						/>
 					</div>
