@@ -1,0 +1,33 @@
+.table {
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #e2e2e2;
+
+}
+.tableTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+.tableNav {
+  border: 1px solid #888;
+  padding: 4px;
+}
+.tableHead {
+  padding-bottom: 1em;
+}
+.tableRow {
+  display: flex;
+}
+.tableTop {
+  align-items: flex-end;
+}
+.tableCell {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+.firstCell {
+  width: 25%;
+}
