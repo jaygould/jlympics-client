@@ -17,10 +17,22 @@ interface IState {
 		num: number | null;
 	} | null;
 	tableDateType: string | null;
-	currentTableData: {
-		steps: number | null;
-		distance: number | null;
-	} | null;
+	userData: ITableRowData[];
+}
+
+interface ITableRowData {
+	steps: {
+		value: number;
+	};
+	distance: {
+		value: number;
+	};
+	userDetails: IUserTableData;
+}
+
+interface IUserTableData {
+	first: string;
+	profileImgUrl: string;
 }
 
 class FitnessTable extends React.Component<IProps, IState> {
@@ -32,10 +44,7 @@ class FitnessTable extends React.Component<IProps, IState> {
 				num: null
 			},
 			tableDateType: null,
-			currentTableData: {
-				steps: null,
-				distance: null
-			}
+			userData: []
 		};
 	}
 	componentDidMount() {
@@ -57,19 +66,23 @@ class FitnessTable extends React.Component<IProps, IState> {
 	updateTableData(month: number | null, updateType: string) {
 		const { fitbitData } = this.props;
 		month = month && generalService.monthNextPrev(month);
-		const summedSteps = fitbitService.countUserSteps(
-			fitbitData.monthFormattedSteps,
-			month
-		);
-		const summedDistance = fitbitService.countUserDistance(
-			fitbitData.monthFormattedDistance,
-			month
-		);
+		const userData = fitbitData.map(userData => {
+			const summedSteps = fitbitService.countUserSteps(
+				userData.monthFormattedSteps,
+				month
+			);
+			const summedDistance = fitbitService.countUserDistance(
+				userData.monthFormattedDistance,
+				month
+			);
+			return {
+				steps: summedSteps,
+				distance: summedDistance,
+				userDetails: userData.fbData
+			};
+		});
 		this.setState({
-			currentTableData: {
-				steps: summedSteps.value,
-				distance: summedDistance.value
-			}
+			userData
 		});
 	}
 	changeDate(tableDate: any, nextPrev: string) {
@@ -80,7 +93,7 @@ class FitnessTable extends React.Component<IProps, IState> {
 		}
 	}
 	render() {
-		const { tableDate, currentTableData } = this.state;
+		const { tableDate, userData } = this.state;
 		return (
 			<div className={css.tableWrap}>
 				<div className={css.table}>
@@ -113,15 +126,21 @@ class FitnessTable extends React.Component<IProps, IState> {
 						<div className={`${css.tableCell} ${css.tableTop}`}>Distance</div>
 					</div>
 					<div className={css.tableBody}>
-						<div className={`${css.tableRow}`}>
-							<div className={`${css.tableCell} ${css.firstCell}`}>Person 1</div>
-							<div className={`${css.tableCell}`}>
-								{currentTableData && currentTableData.steps}
-							</div>
-							<div className={`${css.tableCell}`}>
-								{currentTableData && currentTableData.distance}
-							</div>
-						</div>
+						{userData.map((userData, i) => {
+							return (
+								<div key={i} className={`${css.tableRow}`}>
+									<div className={`${css.tableCell} ${css.firstCell}`}>
+										{userData.userDetails.first}
+									</div>
+									<div className={`${css.tableCell}`}>
+										{userData && userData.steps.value}
+									</div>
+									<div className={`${css.tableCell}`}>
+										{userData && userData.distance.value}
+									</div>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>
