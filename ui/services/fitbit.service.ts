@@ -25,6 +25,13 @@ class FitbitService {
 			'POST'
 		);
 	}
+	public refreshFitbitTokens(): Promise<any> {
+		return fetchService.isofetchAuthed(
+			`/auth/fitbit/refresh-fitbit-tokens`,
+			{},
+			'POST'
+		);
+	}
 	public countUserSteps(monthFormattedSteps: any, month: any) {
 		const thisMonthsStepData = monthFormattedSteps.filter((steps: any) => {
 			return steps.month.num == month;

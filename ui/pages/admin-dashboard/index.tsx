@@ -29,7 +29,20 @@ function Dashboard(props: IProps) {
 					});
 				}}
 			>
-				Update
+				Update data
+			</a>
+			<a
+				onClick={e => {
+					e.preventDefault();
+					fitbitService.refreshFitbitTokens().then(resp => {
+						if (resp.success) {
+						} else {
+							globalStatus.addMessage(resp.message);
+						}
+					});
+				}}
+			>
+				Refresh tokens
 			</a>
 			<div />
 		</div>

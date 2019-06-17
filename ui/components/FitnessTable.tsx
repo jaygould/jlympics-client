@@ -35,6 +35,11 @@ interface IUserTableData {
 	profileImgUrl: string;
 }
 
+// TODO: refactor to add in all the types. e.g. fitbitData in props. this can be re-used in the homr and auth-fb pages. also maybe server.
+// do find and replace for "any" on all pages. then make a button in adminland to refresh data using the api endpoint I made beofree, and create cron to update this each day
+// then refactor to make pages and components leaner
+// then STYLE
+
 class FitnessTable extends React.Component<IProps, IState> {
 	constructor(props: any) {
 		super(props);
