@@ -18,6 +18,13 @@ class FitbitService {
 			'POST'
 		);
 	}
+	public getAllUsersFitbitData(): Promise<any> {
+		return fetchService.isofetchAuthed(
+			`/auth/fitbit/update-past-user-data`,
+			{},
+			'POST'
+		);
+	}
 	public countUserSteps(monthFormattedSteps: any, month: any) {
 		const thisMonthsStepData = monthFormattedSteps.filter((steps: any) => {
 			return steps.month.num == month;
