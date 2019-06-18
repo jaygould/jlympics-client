@@ -3,7 +3,7 @@ import * as React from 'react';
 import fitbitService from '../../services/fitbit.service';
 
 import FitnessTable from '../../components/FitnessTable';
-import Header from '../../components/head';
+import Header from '../../components/Header';
 import GlobalAuth from '../../components/HocGlobalAuth';
 import GlobalStatus from '../../components/HocGlobalStatus';
 
@@ -26,11 +26,10 @@ class Home extends React.Component<IProps, {}> {
 	render() {
 		const { fitbitData, currentMonth } = this.props;
 		return (
-			<div>
+			<React.Fragment>
 				<Header />
-				<h2 className={css.example}>Welcome to Jlympics!</h2>
 				<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
-			</div>
+			</React.Fragment>
 		);
 	}
 }

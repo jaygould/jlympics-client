@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two:700|Rubik&display=swap');
+body {
+  font-family: 'Rubik', sans-serif;
+  &>div {
+    padding: 24px;
+  }
+}

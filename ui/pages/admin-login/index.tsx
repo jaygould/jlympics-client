@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import * as React from 'react';
 
-import Header from '../../components/head';
+import Header from '../../components/Header';
 import GlobalAuth from '../../components/HocGlobalAuth';
 import GlobalStatus from '../../components/HocGlobalStatus';
 

@@ -8,12 +8,14 @@ export interface IGlobalStatus {
 
 export interface IGlobalAuth {
 	isLoggedIn: boolean;
-	user: IFitbitUser | null;
+	user: IFitbitUser;
 	addUserDetails: ({
 		displayName,
+		displayPhoto,
 		email
 	}: {
 		displayName?: string;
+		displayPhoto?: string;
 		email?: string;
 	}) => void;
 	logout: () => void;

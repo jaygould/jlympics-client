@@ -4,7 +4,7 @@ import Link from 'next/link';
 import * as React from 'react';
 
 import FitnessTable from '../../components/FitnessTable';
-import Header from '../../components/head';
+import Header from '../../components/Header';
 import GlobalAuth from '../../components/HocGlobalAuth';
 import GlobalStatus from '../../components/HocGlobalStatus';
 import authService from '../../services/auth.service';
@@ -57,7 +57,8 @@ class AuthedFb extends React.Component<IProps, IState> {
 			// settimeout is needed to run the addUserDetails function after the authContext
 			// is rendered in the HoC.
 			globalAuth.addUserDetails({
-				displayName: pageProps.thisUser.displayName
+				displayName: pageProps.thisUser.displayName,
+				displayPhoto: pageProps.thisUser.userPhoto
 			});
 		}, 0);
 	}
@@ -69,22 +70,42 @@ class AuthedFb extends React.Component<IProps, IState> {
 	render() {
 		const { pageProps } = this.props;
 		const { isActive } = this.state;
+		const { thisUser } = pageProps;
 		return (
 			<div>
 				<Header />
-				<h2 className={css.example}>
-					You have logged in successfully as{' '}
-					{pageProps.thisUser.displayName
-						? pageProps.thisUser.displayName
-						: 'a Facebook user'}
-					!
-				</h2>
-				{pageProps.thisUser.fitbit ? (
+				<div className={css.loggedInIntro}>
+					{!thisUser.fitbit && (
+						<React.Fragment>
+							<div className={`${css.iconWrap}`}>
+								<div className={`${css.iconInner}`}>
+									<img className={css.fitnessIcon} src="/static/icons/fitness.svg" />
+								</div>
+							</div>
+
+							<p>
+								You are logged in as{' '}
+								{thisUser.displayName ? thisUser.displayName : 'a Facebook user'} but
+								have not linked to your Fitbit account.
+							</p>
+							<p>
+								{' '}
+								Click{' '}
+								<Link href={`${config.apiUrl}/auth/fitbit`}>
+									<a>here</a>
+								</Link>{' '}
+								to login with Fitbit
+							</p>
+						</React.Fragment>
+					)}
+				</div>
+
+				{thisUser.fitbit ? (
 					<div>
 						<div>
 							<p>You are connected to your Fitbit account:</p>
-							<img src={pageProps.thisUser.fitbit.fitbitAvatar} />
-							<p>Fitbit Name: {pageProps.thisUser.fitbit.fitbitName}</p>
+							<img src={thisUser.fitbit.fitbitAvatar} />
+							<p>Fitbit Name: {thisUser.fitbit.fitbitName}</p>
 						</div>
 						<div>
 							{isActive ? (
@@ -128,15 +149,7 @@ class AuthedFb extends React.Component<IProps, IState> {
 							currentMonth={pageProps.currentMonth}
 						/>
 					</div>
-				) : (
-					<div>
-						Click{' '}
-						<Link href={`${config.apiUrl}/auth/fitbit`}>
-							<a>here</a>
-						</Link>{' '}
-						to login with Fitbit
-					</div>
-				)}
+				) : null}
 			</div>
 		);
 	}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Header from '../../components/head';
+import Header from '../../components/Header';
 const css = require('./index.scss');
 
 import GlobalStatus from '../../components/HocGlobalStatus';
