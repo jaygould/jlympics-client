@@ -1,4 +1,17 @@
-$font-size: 50px;
-.example {
-  font-size: $font-size;
+.adminBtn {
+  background: #444;
+  color: #fff;
+  width: 200px;
+  padding: 10px;
+  display: block;
+  text-align: center;
+  border-radius: 4px;
+  margin: 5px auto;
+  cursor: pointer;
+  &:hover {
+    background: #555;
+  }
+  &:active {
+    background: #333;
+  }
 }

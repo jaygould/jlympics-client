@@ -22,6 +22,16 @@ function Header(props: IProps) {
 
 	return (
 		<React.Fragment>
+			<StatusConsumer>
+				{globalStatus => {
+					return globalStatus && globalStatus.message ? (
+						<div className={css.globalStatusWrap}>
+							<p className="globalStatus">{globalStatus.message}</p>
+						</div>
+					) : null;
+				}}
+			</StatusConsumer>
+
 			<Head>
 				<title>
 					{config.siteName} | {config.siteTag}
@@ -30,16 +40,8 @@ function Header(props: IProps) {
 			</Head>
 			<div className={css.header}>
 				<Link href={`/`}>
-						<h1>{config.siteName}</h1>
+					<h1>{config.siteName}</h1>
 				</Link>
-
-				<StatusConsumer>
-					{globalStatus => {
-						return globalStatus ? (
-							<p className="globalStatus">{globalStatus.message}</p>
-						) : null;
-					}}
-				</StatusConsumer>
 
 				<UserProfile globalAuth={globalAuth} />
 

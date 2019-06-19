@@ -18,14 +18,15 @@ function Dashboard(props: IProps) {
 		<div>
 			<Header />
 			<main>
-				<h2 className={css.example}>Dash!</h2>
 				<a
+					className={css.adminBtn}
 					onClick={e => {
 						e.preventDefault();
 						fitbitService.getAllUsersFitbitData().then(resp => {
 							if (resp.success) {
+								globalStatus.addMessage('Success!');
 							} else {
-								globalStatus.addMessage(resp.message);
+								globalStatus.addMessage('Something went wrong.');
 							}
 						});
 					}}
@@ -33,12 +34,14 @@ function Dashboard(props: IProps) {
 					Update data
 				</a>
 				<a
+					className={css.adminBtn}
 					onClick={e => {
 						e.preventDefault();
 						fitbitService.refreshFitbitTokens().then(resp => {
 							if (resp.success) {
+								globalStatus.addMessage('Success!');
 							} else {
-								globalStatus.addMessage(resp.message);
+								globalStatus.addMessage('Something went wrong.');
 							}
 						});
 					}}

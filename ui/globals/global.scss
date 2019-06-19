@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster+Two:700|Rubik&display=swap');
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: 'Rubik', sans-serif;
+  color: #444;
   &>div {
     padding: 24px;
   }
@@ -14,6 +18,5 @@ body {
   main {
     width: 800px;
     margin: 0 auto;
-  
   }
 }
