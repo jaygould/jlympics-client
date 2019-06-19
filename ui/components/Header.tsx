@@ -29,7 +29,9 @@ function Header(props: IProps) {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className={css.header}>
-				<h1>{config.siteName}</h1>
+				<Link href={`/`}>
+						<h1>{config.siteName}</h1>
+				</Link>
 
 				<StatusConsumer>
 					{globalStatus => {

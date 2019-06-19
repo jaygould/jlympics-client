@@ -1,5 +1,6 @@
 .header {
   overflow-y: auto;
+  overflow: visible;
   position: relative;
   min-height: 100px;
   display: flex;
@@ -7,7 +8,9 @@
     font-family: 'Lobster Two', cursive;
     font-size: 44px;
     margin: 0px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #444;
   }
 }
 nav {
@@ -23,13 +26,17 @@ nav {
 		background-color: #3399CC;
 		text-align: center;
 		cursor: pointer;
-		color: #fff;
+    color: #fff;
+    transition: all .2s ease-in-out;
+    &:hover { transform: scale(1.1); }
+
   }
   .menuBtn {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+
     .menuIcon {
       width: 65%;
       height: 65%;

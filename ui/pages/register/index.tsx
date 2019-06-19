@@ -18,7 +18,7 @@ function Register(props: IProps) {
 	return (
 		<div>
 			<Header />
-			<div>
+			<main>
 				<Formik
 					initialValues={{
 						firstName: '',
@@ -67,7 +67,7 @@ function Register(props: IProps) {
 						</Form>
 					)}
 				/>
-			</div>
+			</main>
 		</div>
 	);
 }

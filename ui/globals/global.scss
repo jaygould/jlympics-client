@@ -4,4 +4,16 @@ body {
   &>div {
     padding: 24px;
   }
+  a {
+    color: #3399CC;
+    text-decoration: none;
+  }
+  p {
+    line-height: 24px;
+  }
+  main {
+    width: 800px;
+    margin: 0 auto;
+  
+  }
 }

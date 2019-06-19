@@ -17,34 +17,36 @@ function Dashboard(props: IProps) {
 	return (
 		<div>
 			<Header />
-			<h2 className={css.example}>Dash!</h2>
-			<a
-				onClick={e => {
-					e.preventDefault();
-					fitbitService.getAllUsersFitbitData().then(resp => {
-						if (resp.success) {
-						} else {
-							globalStatus.addMessage(resp.message);
-						}
-					});
-				}}
-			>
-				Update data
-			</a>
-			<a
-				onClick={e => {
-					e.preventDefault();
-					fitbitService.refreshFitbitTokens().then(resp => {
-						if (resp.success) {
-						} else {
-							globalStatus.addMessage(resp.message);
-						}
-					});
-				}}
-			>
-				Refresh tokens
-			</a>
-			<div />
+			<main>
+				<h2 className={css.example}>Dash!</h2>
+				<a
+					onClick={e => {
+						e.preventDefault();
+						fitbitService.getAllUsersFitbitData().then(resp => {
+							if (resp.success) {
+							} else {
+								globalStatus.addMessage(resp.message);
+							}
+						});
+					}}
+				>
+					Update data
+				</a>
+				<a
+					onClick={e => {
+						e.preventDefault();
+						fitbitService.refreshFitbitTokens().then(resp => {
+							if (resp.success) {
+							} else {
+								globalStatus.addMessage(resp.message);
+							}
+						});
+					}}
+				>
+					Refresh tokens
+				</a>
+				<div />
+			</main>
 		</div>
 	);
 }

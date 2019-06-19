@@ -28,7 +28,9 @@ class Home extends React.Component<IProps, {}> {
 		return (
 			<React.Fragment>
 				<Header />
-				<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
+				<main>
+					<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
+				</main>
 			</React.Fragment>
 		);
 	}

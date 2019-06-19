@@ -23,52 +23,54 @@ function AdminLogin(props: IProps) {
 	return (
 		<div>
 			<Header />
-			<Formik
-				initialValues={{
-					email: '',
-					password: ''
-				}}
-				onSubmit={(
-					values: ILoginIn,
-					{ setSubmitting }: FormikActions<ILoginIn>
-				) => {
-					authService
-						.loginUser({ email: values.email, password: values.password })
-						.then(resp => {
-							setSubmitting(false);
-							if (resp.success) {
-								authService.saveTokens(resp.authToken).then(() => {
-									globalAuth.addUserDetails({ email: values.email });
-									Router.push('/admin-dashboard');
-								});
-							} else {
-								globalStatus.addMessage(resp.message);
-							}
-						})
-						.catch();
-				}}
-				render={() => (
-					<Form>
-						<label htmlFor="email">Email</label>
-						<Field id="email" name="email" placeholder="" type="email" />
+			<main>
+				<Formik
+					initialValues={{
+						email: '',
+						password: ''
+					}}
+					onSubmit={(
+						values: ILoginIn,
+						{ setSubmitting }: FormikActions<ILoginIn>
+					) => {
+						authService
+							.loginUser({ email: values.email, password: values.password })
+							.then(resp => {
+								setSubmitting(false);
+								if (resp.success) {
+									authService.saveTokens(resp.authToken).then(() => {
+										globalAuth.addUserDetails({ email: values.email });
+										Router.push('/admin-dashboard');
+									});
+								} else {
+									globalStatus.addMessage(resp.message);
+								}
+							})
+							.catch();
+					}}
+					render={() => (
+						<Form>
+							<label htmlFor="email">Email</label>
+							<Field id="email" name="email" placeholder="" type="email" />
 
-						<label htmlFor="password">Password</label>
-						<Field id="password" name="password" placeholder="" type="password" />
+							<label htmlFor="password">Password</label>
+							<Field id="password" name="password" placeholder="" type="password" />
 
-						<button type="submit" style={{ display: 'block' }}>
-							Submit
-						</button>
-					</Form>
-				)}
-			/>
+							<button type="submit" style={{ display: 'block' }}>
+								Submit
+							</button>
+						</Form>
+					)}
+				/>
 
-			<div>
-				Click{' '}
-				<Link href="/register">
-					<a>here</a>
-				</Link>{' '}
-				to register
-			</div>
+				<div>
+					Click{' '}
+					<Link href="/register">
+						<a>here</a>
+					</Link>{' '}
+					to register
+				</div>
+			</main>
 		</div>
 	);
 }

@@ -6,7 +6,9 @@ function About() {
 	return (
 		<div>
 			<Header />
-			<h2 className={css.example}>About!</h2>
+			<main>
+				<h2 className={css.example}>About!</h2>
+			</main>
 			<div />
 		</div>
 	);

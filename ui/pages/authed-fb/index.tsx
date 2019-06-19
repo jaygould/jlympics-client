@@ -74,11 +74,11 @@ class AuthedFb extends React.Component<IProps, IState> {
 		return (
 			<div>
 				<Header />
-				<div className={css.loggedInIntro}>
+				<main>
 					{!thisUser.fitbit && (
 						<React.Fragment>
 							<div className={`${css.iconWrap}`}>
-								<div className={`${css.iconInner}`}>
+								<div className={`${css.iconInner} ${css.red}`}>
 									<img className={css.fitnessIcon} src="/static/icons/fitness.svg" />
 								</div>
 							</div>
@@ -98,58 +98,67 @@ class AuthedFb extends React.Component<IProps, IState> {
 							</p>
 						</React.Fragment>
 					)}
-				</div>
 
-				{thisUser.fitbit ? (
-					<div>
-						<div>
-							<p>You are connected to your Fitbit account:</p>
-							<img src={thisUser.fitbit.fitbitAvatar} />
-							<p>Fitbit Name: {thisUser.fitbit.fitbitName}</p>
-						</div>
-						<div>
-							{isActive ? (
-								<div>
-									<p>
-										Your Fitbit account is active so your stats are shown on the public
-										app.{' '}
-										<a
-											href="#"
-											onClick={e => {
-												e.preventDefault();
-												this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, false);
-											}}
-										>
-											Click here
-										</a>{' '}
-										to deactivate your account.
-									</p>
+					{thisUser.fitbit ? (
+						<React.Fragment>
+							<div className={`${css.iconWrap}`}>
+								<div className={`${css.iconInner} ${css.green}`}>
+									<img className={css.fitnessIcon} src="/static/icons/fitbitWatch.svg" />
 								</div>
-							) : (
-								<div>
-									<p>
-										Your Fitbit account is not active so your stats are hidden from the
-										public app.{' '}
-										<a
-											href="#"
-											onClick={e => {
-												e.preventDefault();
-												this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, true);
-											}}
-										>
-											Click here
-										</a>{' '}
-										to activate your account.
-									</p>
+							</div>
+
+							<div>
+								<p>You are connected to your Fitbit account as:</p>
+								<div className={css.fitbitName}>
+									<p>{thisUser.fitbit.fitbitName}</p>
 								</div>
-							)}
-						</div>
-						<FitnessTable
-							fitbitData={pageProps.fitbitData}
-							currentMonth={pageProps.currentMonth}
-						/>
-					</div>
-				) : null}
+							</div>
+							<div>
+								{isActive ? (
+									<div>
+										<p>
+											Your Fitbit account is active so your stats are shown on the public
+											app.
+											<br />
+											<a
+												href="#"
+												onClick={e => {
+													e.preventDefault();
+													this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, false);
+												}}
+											>
+												Click here
+											</a>{' '}
+											to deactivate your account.
+										</p>
+									</div>
+								) : (
+									<div>
+										<p>
+											Your Fitbit account is not active so your stats are hidden from the
+											public app.
+											<br />
+											<a
+												href="#"
+												onClick={e => {
+													e.preventDefault();
+													this.updateActiveStatus(pageProps.thisUser.fitbit.fitbitId, true);
+												}}
+											>
+												Click here
+											</a>{' '}
+											to activate your account.
+										</p>
+									</div>
+								)}
+							</div>
+							<FitnessTable
+								fitbitData={pageProps.fitbitData}
+								currentMonth={pageProps.currentMonth}
+							/>
+						</React.Fragment>
+					) : null}
+				</main>
 			</div>
 		);
 	}

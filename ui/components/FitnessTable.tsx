@@ -110,7 +110,10 @@ class FitnessTable extends React.Component<IProps, IState> {
 								this.changeDate(tableDate, 'prev');
 							}}
 						>
-							&#8249;
+							<img
+								className={`${css.tableArrow} ${css.arrowLeft}`}
+								src="/static/icons/arrow-left.svg"
+							/>
 						</div>
 						<h2>{tableDate && tableDate.name && tableDate.name}</h2>
 						<div
@@ -120,22 +123,37 @@ class FitnessTable extends React.Component<IProps, IState> {
 								this.changeDate(tableDate, 'next');
 							}}
 						>
-							&#8250;
+							<img
+								className={`${css.tableArrow} ${css.arrowRight}`}
+								src="/static/icons/arrow-right.svg"
+							/>
 						</div>
 					</div>
 					<div className={`${css.tableRow} ${css.tableHead}`}>
 						<div className={`${css.tableCell} ${css.tableTop} ${css.firstCell}`}>
 							-
 						</div>
-						<div className={`${css.tableCell} ${css.tableTop}`}>Steps</div>
-						<div className={`${css.tableCell} ${css.tableTop}`}>Distance</div>
+						<div className={`${css.tableCell} ${css.tableTop}`}>
+							<img className={`${css.tableHeadIcon}`} src="/static/icons/steps.svg" />
+							Steps
+						</div>
+						<div className={`${css.tableCell} ${css.tableTop}`}>
+							<img
+								className={`${css.tableHeadIcon}`}
+								src="/static/icons/distance.svg"
+							/>
+							Distance
+						</div>
 					</div>
 					<div className={css.tableBody}>
 						{userData.map((userData, i) => {
 							return (
 								<div key={i} className={`${css.tableRow}`}>
 									<div className={`${css.tableCell} ${css.firstCell}`}>
-										{userData.userDetails.first}
+										<span>{userData.userDetails.first}</span>
+										<div className={css.tableImageWrap}>
+											<img src={userData.userDetails.profileImgUrl} />
+										</div>
 									</div>
 									<div className={`${css.tableCell}`}>
 										{userData && userData.steps.value}
