@@ -81,8 +81,8 @@ class FitnessTable extends React.Component<IProps, IState> {
 				month
 			);
 			return {
-				steps: summedSteps,
-				distance: summedDistance,
+				steps: this.roundNumber(summedSteps),
+				distance: this.roundNumber(summedDistance),
 				userDetails: userData.fbData
 			};
 		});
@@ -97,8 +97,11 @@ class FitnessTable extends React.Component<IProps, IState> {
 			this.updateTableData(dateNum, 'interact');
 		}
 	}
-	formatSteps(stepsCount) {
-		return stepsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	formatData(count) {
+		return count ? count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0;
+	}
+	roundNumber(data) {
+		return Math.round(data.value * 100) / 100;
 	}
 	render() {
 		const { tableDate, userData } = this.state;
@@ -159,10 +162,10 @@ class FitnessTable extends React.Component<IProps, IState> {
 										</div>
 									</div>
 									<div className={`${css.tableCell}`}>
-										{userData && this.formatSteps(userData.steps.value)}
+										{userData && this.formatData(userData.steps)}
 									</div>
 									<div className={`${css.tableCell}`}>
-										{userData && userData.distance.value}
+										{userData && this.formatData(userData.distance)}
 									</div>
 								</div>
 							);
