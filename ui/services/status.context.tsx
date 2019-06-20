@@ -12,10 +12,19 @@ class StatusProvider extends Component {
 			<StatusCtx.Provider
 				value={{
 					message: this.state.message,
-					addMessage: message =>
-						this.setState({
-							message
-						})
+					addMessage: message => {
+						this.setState(
+							{
+								message
+							},
+							() => {
+								setTimeout(() => {
+									this.setState({ message: '' });
+								}, 5000);
+							}
+						);
+					},
+					closeStatus: () => this.setState({ message: '' })
 				}}
 			>
 				{this.props.children}

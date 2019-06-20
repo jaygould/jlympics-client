@@ -25,7 +25,12 @@ function Header(props: IProps) {
 			<StatusConsumer>
 				{globalStatus => {
 					return globalStatus && globalStatus.message ? (
-						<div className={css.globalStatusWrap}>
+						<div
+							className={css.globalStatusWrap}
+							onClick={() => {
+								globalStatus.closeStatus();
+							}}
+						>
 							<p className="globalStatus">{globalStatus.message}</p>
 						</div>
 					) : null;

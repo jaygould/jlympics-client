@@ -4,6 +4,7 @@ import { IFitbitUser } from './fitbit.types';
 export interface IGlobalStatus {
 	message: string;
 	addMessage: (message: string) => any;
+	closeStatus: () => void;
 }
 
 export interface IGlobalAuth {

@@ -62,14 +62,14 @@ function AdminLogin(props: IProps) {
 						</Form>
 					)}
 				/>
-
-				<div>
+				{/* register is taken out of production */}
+				{/* <div>
 					Click{' '}
 					<Link href="/register">
 						<a>here</a>
 					</Link>{' '}
 					to register
-				</div>
+				</div> */}
 			</main>
 		</div>
 	);
