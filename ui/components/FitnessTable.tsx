@@ -97,6 +97,9 @@ class FitnessTable extends React.Component<IProps, IState> {
 			this.updateTableData(dateNum, 'interact');
 		}
 	}
+	formatSteps(stepsCount) {
+		return stepsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
 	render() {
 		const { tableDate, userData } = this.state;
 		return (
@@ -142,7 +145,7 @@ class FitnessTable extends React.Component<IProps, IState> {
 								className={`${css.tableHeadIcon}`}
 								src="/static/icons/distance.svg"
 							/>
-							Distance
+							Distance (km)
 						</div>
 					</div>
 					<div className={css.tableBody}>
@@ -156,7 +159,7 @@ class FitnessTable extends React.Component<IProps, IState> {
 										</div>
 									</div>
 									<div className={`${css.tableCell}`}>
-										{userData && userData.steps.value}
+										{userData && this.formatSteps(userData.steps.value)}
 									</div>
 									<div className={`${css.tableCell}`}>
 										{userData && userData.distance.value}
