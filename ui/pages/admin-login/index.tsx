@@ -50,12 +50,14 @@ function AdminLogin(props: IProps) {
 					}}
 					render={() => (
 						<Form>
-							<label htmlFor="email">Email</label>
-							<Field id="email" name="email" placeholder="" type="email" />
-
-							<label htmlFor="password">Password</label>
-							<Field id="password" name="password" placeholder="" type="password" />
-
+							<div>
+								<label htmlFor="email">Email</label>
+								<Field id="email" name="email" placeholder="" type="email" />
+							</div>
+							<div>
+								<label htmlFor="password">Password</label>
+								<Field id="password" name="password" placeholder="" type="password" />
+							</div>
 							<button type="submit" style={{ display: 'block' }}>
 								Submit
 							</button>
