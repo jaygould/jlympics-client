@@ -1,3 +1,6 @@
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
+const { API_URL } = publicRuntimeConfig;
 export default {
 	siteName: 'Jlympics',
 	siteTag: 'Fitness competition app',
@@ -5,5 +8,5 @@ export default {
 		Accept: 'application/json',
 		'Content-Type': 'application/json'
 	},
-	apiUrl: 'http://localhost:1138/api/v1'
+	apiUrl: `${API_URL}/api/v1`
 };

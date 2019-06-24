@@ -23,11 +23,11 @@ app
 			return handle(req, res);
 		});
 
-		server.listen(3000, (err: express.Errback) => {
+		server.listen(3031, (err: express.Errback) => {
 			if (err) {
 				throw err;
 			}
-			console.log('> Ready on http://localhost:3000');
+			console.log('> Ready on http://localhost:3031');
 		});
 	})
 	.catch((ex: any) => {

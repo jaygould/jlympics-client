@@ -19,7 +19,12 @@ interface IProps {
 }
 class Home extends React.Component<IProps, {}> {
 	static async getInitialProps(ctx: any) {
-		const fitbitData = await fitbitService.getActiveUsersFitbitData();
+		let fitbitData;
+		try {
+			fitbitData = await fitbitService.getActiveUsersFitbitData();
+		} catch (e) {
+			return { query: ctx.query, fitbitData: null, currentMonth: null };
+		}
 		const currentMonth = new Date().getMonth();
 		return { query: ctx.query, fitbitData, currentMonth };
 	}
@@ -29,7 +34,11 @@ class Home extends React.Component<IProps, {}> {
 			<React.Fragment>
 				<Header />
 				<main>
-					<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
+					{fitbitData && currentMonth ? (
+						<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
+					) : (
+						<p>There is no data to view. There may be a server connection problem.</p>
+					)}
 				</main>
 			</React.Fragment>
 		);
