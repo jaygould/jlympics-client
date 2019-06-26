@@ -1,0 +1,114 @@
+.globalStatusWrap {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0px 40px 0px 40px;
+  background: #3399CC;
+  z-index: 10;
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+  p {
+    text-align: center;
+    color: #fff;
+    line-height: 12px;
+  }
+}
+.header {
+  overflow-y: auto;
+  overflow: visible;
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  h1 {
+    font-family: 'Lobster Two', cursive;
+    font-size: 44px;
+    margin: 0px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+}
+nav {
+	display: block;
+	position: absolute;
+	top: 0em;
+	right: 0em;
+	.toggle {
+		height: 60px;
+		width: 60px;
+		float: left;
+		font-size: 2em;
+		background-color: #3399CC;
+		text-align: center;
+		cursor: pointer;
+    color: #fff;
+    transition: all .2s ease-in-out;
+    &:hover { transform: scale(1.1); }
+
+  }
+  .menuBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .menuIcon {
+      width: 65%;
+      height: 65%;
+    }  
+  
+  }
+}
+.close {
+	display: block;
+	float: left;
+	height: 60px;
+	width: 60px;
+	background-color: #E64136;
+	text-align: center;
+	cursor: pointer;
+	font-size: 1.5em;
+	display: none;
+}
+.menu {
+	float: left;
+	background-color: #f4f4f4;
+	overflow: hidden;
+	position: relative;
+	width: 0;
+  transition: width 0.5s;
+	.menuBlock {
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+		height: 60px;
+		li {
+			display: inline-block;
+			a {
+				display: block;
+				height: 60px;
+				padding: 0 3em;
+				line-height: 60px;
+				text-transform: uppercase;
+				text-decoration: none;
+				font-size: 0.7em;
+        letter-spacing: .1em;
+        color: #555;
+				&:hover {
+					border-bottom: 3px solid #3399CC;
+					cursor: pointer;
+					background-color: lighten(#3399CC, 40%);
+				}
+			}
+		}
+	}
+}
+
+/*  Open Menu  */
+.open {
+	width: 580px;
+	transition: width 0.5s;
+}
+.showClose {
+	display: block;
+}

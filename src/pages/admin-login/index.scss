@@ -1,0 +1,22 @@
+form {
+  div {
+    margin-bottom: 0.75em;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.25em;
+  }
+  input {
+    width: 250px;
+    padding: 0.6em 0.7em;
+    font-size: 0.95em;  
+  }
+  button {
+    padding: 1.75em 2.75em;
+    background: #39c;
+    color: white;
+    border: 0px;
+    cursor: pointer;
+
+  }
+}
