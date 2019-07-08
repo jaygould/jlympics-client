@@ -8,5 +8,5 @@ export default {
 		Accept: 'application/json',
 		'Content-Type': 'application/json'
 	},
-	apiUrl: `${API_URL}/api/v1`
+	apiUrl: `${API_URL}/v1`
 };
