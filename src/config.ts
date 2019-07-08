@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 const { API_URL } = publicRuntimeConfig;
 export default {
-	siteName: 'Jlympics',
+	siteName: 'Trackletics',
 	siteTag: 'Fitness competition app',
 	configHeaders: {
 		Accept: 'application/json',
