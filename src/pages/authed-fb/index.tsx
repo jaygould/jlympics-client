@@ -52,7 +52,7 @@ class AuthedFb extends React.Component<IProps, IState> {
 	}
 	componentDidMount() {
 		const { globalAuth, pageProps } = this.props;
-		const isActive = pageProps.fitbitData.isActive;
+		const isActive = pageProps.fitbitData[0].isActive;
 		this.setState({
 			isActive
 		});
