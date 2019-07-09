@@ -1,4 +1,7 @@
+const css = require('./index.scss');
+
 import { Field, Form, Formik, FormikActions } from 'formik';
+import Link from 'next/link';
 import Router from 'next/router';
 import * as React from 'react';
 
@@ -61,14 +64,9 @@ function AdminLogin(props: IProps) {
 						</Form>
 					)}
 				/>
-				{/* register is taken out of production */}
-				{/* <div>
-					Click{' '}
-					<Link href="/register">
-						<a>here</a>
-					</Link>{' '}
-					to register
-				</div> */}
+				<Link href="/register">
+					<a className={css.regLink}>Register</a>
+				</Link>{' '}
 			</main>
 		</div>
 	);
