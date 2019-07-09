@@ -2,6 +2,7 @@ const css = require('./index.scss');
 
 import * as React from 'react';
 import Header from '../../components/Header';
+import GlobalErrorHandler from '../../components/HocGlobalErrorHandler';
 import GlobalStatus from '../../components/HocGlobalStatus';
 
 import fitbitService from '../../services/fitbit.service';
@@ -58,4 +59,4 @@ Dashboard.getInitialProps = async () => {
 	return {};
 };
 
-export default GlobalStatus(Dashboard);
+export default GlobalStatus(GlobalErrorHandler(Dashboard));

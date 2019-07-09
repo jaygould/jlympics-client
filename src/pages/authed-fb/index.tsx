@@ -6,6 +6,7 @@ import * as React from 'react';
 import FitnessTable from '../../components/FitnessTable';
 import Header from '../../components/Header';
 import GlobalAuth from '../../components/HocGlobalAuth';
+import GlobalErrorHandler from '../../components/HocGlobalErrorHandler';
 import GlobalStatus from '../../components/HocGlobalStatus';
 import authService from '../../services/auth.service';
 import fitbitService from '../../services/fitbit.service';
@@ -165,4 +166,4 @@ class AuthedFb extends React.Component<IProps, IState> {
 		);
 	}
 }
-export default GlobalAuth(GlobalStatus(AuthedFb));
+export default GlobalAuth(GlobalStatus(GlobalErrorHandler(AuthedFb)));

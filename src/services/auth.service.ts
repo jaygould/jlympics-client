@@ -6,6 +6,7 @@ import fetchService from './fetch.service';
 import { ILoginIn, IRegisterIn } from '../types/auth.types';
 import { IRedirectOptions } from '../types/global.types';
 
+import config from '../config';
 class AuthService {
 	public loginUser({ email, password }: ILoginIn): Promise<any> {
 		return fetchService.isofetch(`/auth/login`, { email, password }, 'POST');
@@ -94,7 +95,7 @@ class AuthService {
 		if (isServer && ctx.query.fbJwt) {
 			// get fbJwt from URL and use it to create a cookie for access later
 			fbJwt = ctx.query.fbJwt;
-			ctx.res.cookie('fbJwt', fbJwt);
+			ctx.res.cookie('fbJwt', fbJwt, { domain: config.cookieUrl });
 		}
 
 		fbJwt = fbJwt || cookiefbJwt;

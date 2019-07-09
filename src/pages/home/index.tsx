@@ -5,6 +5,7 @@ import fitbitService from '../../services/fitbit.service';
 import FitnessTable from '../../components/FitnessTable';
 import Header from '../../components/Header';
 import GlobalAuth from '../../components/HocGlobalAuth';
+import GlobalErrorHandler from '../../components/HocGlobalErrorHandler';
 import GlobalStatus from '../../components/HocGlobalStatus';
 
 import { IGlobalAuth, IGlobalStatus } from '../../types/global.types';
@@ -54,4 +55,4 @@ class Home extends React.Component<IProps, {}> {
 	}
 }
 
-export default GlobalAuth(GlobalStatus(Home));
+export default GlobalAuth(GlobalStatus(GlobalErrorHandler(Home)));

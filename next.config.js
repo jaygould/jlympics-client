@@ -8,7 +8,8 @@ module.exports = withCustomBabelConfigFile(
     cssModules: true,
     babelConfigFile: path.resolve("./babel.config.js"),
     publicRuntimeConfig: {
-      API_URL: process.env.API_URL
+      API_URL: process.env.API_URL,
+      COOKIE_URL: process.env.COOKIE_URL
     }
   }))
 );
