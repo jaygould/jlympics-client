@@ -52,10 +52,12 @@ class AuthedFb extends React.Component<IProps, IState> {
 	}
 	componentDidMount() {
 		const { globalAuth, pageProps } = this.props;
-		const isActive = pageProps.fitbitData[0].isActive;
-		this.setState({
-			isActive
-		});
+		if (pageProps.fitbitData.length) {
+			const isActive = pageProps.fitbitData[0].isActive;
+			this.setState({
+				isActive
+			});
+		}
 		setTimeout(() => {
 			// settimeout is needed to run the addUserDetails function after the authContext
 			// is rendered in the HoC.
