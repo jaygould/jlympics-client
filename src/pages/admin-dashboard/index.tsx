@@ -74,7 +74,7 @@ class Dashboard extends React.Component<IProps, IState> {
 									return (
 										<div key={i}>
 											<h3>{monthName}</h3>
-											<p className={css.updateRespData}>User: {user.fitbitName}</p>
+											<p className={css.updateRespData}>User: {user.user.fitbitName}</p>
 											<p className={css.updateRespData}>
 												Success: {user.success ? 'true' : 'false'}
 											</p>
