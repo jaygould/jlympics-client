@@ -69,21 +69,26 @@ class FitnessTable extends React.Component<IProps, IState> {
 	updateTableData(month: number | null, updateType: string) {
 		const { fitbitData } = this.props;
 		month = month && generalService.monthNextPrev(month);
-		const userData = fitbitData.map((userData: any) => {
-			const summedSteps = fitbitService.countUserSteps(
-				userData.monthFormattedSteps,
-				month
-			);
-			const summedDistance = fitbitService.countUserDistance(
-				userData.monthFormattedDistance,
-				month
-			);
-			return {
-				steps: this.roundNumber(summedSteps),
-				distance: this.roundNumber(summedDistance),
-				userDetails: userData.fbData
-			};
-		});
+		const userData = fitbitData
+			.map((userData: any) => {
+				const summedSteps = fitbitService.countUserSteps(
+					userData.monthFormattedSteps,
+					month
+				);
+				const summedDistance = fitbitService.countUserDistance(
+					userData.monthFormattedDistance,
+					month
+				);
+				return {
+					steps: this.roundNumber(summedSteps),
+					distance: this.roundNumber(summedDistance),
+					userDetails: userData.fbData
+				};
+			})
+			// TODO:sort and add crown image, and search for othet trodos
+			.sort((a, b) => {
+				return  b.steps - a.steps;
+			});
 		this.setState({
 			userData
 		});
