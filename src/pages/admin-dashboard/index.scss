@@ -15,9 +15,21 @@
     background: #333;
   }
 }
+.dataGroup {
+  width: 230px;
+  h3 {
+    margin-top: 0px;
+  }
+}
+.dataBlock{
+  background: #f5f5f5;
+  padding: 10px;
+  margin-top: 8px;
+}
 .updateRespData {
   font-size: 11px;
   margin-top: 7px;
   margin-bottom: 0px;
   line-height: 10px;
+  text-align: left;
 }

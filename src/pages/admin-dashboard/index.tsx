@@ -65,7 +65,7 @@ class Dashboard extends React.Component<IProps, IState> {
 						Refresh tokens
 					</a>
 					<div />
-					<div>
+					<div className={css.dataGroup}>
 						{/* map over each month... */}
 						{dataUpdated &&
 							dataUpdated.length &&
@@ -74,7 +74,7 @@ class Dashboard extends React.Component<IProps, IState> {
 								return data.map((user: any) => {
 									const monthName = generalService.monthFormatter(user.month);
 									return (
-										<div key={i}>
+										<div className={css.dataBlock} key={i}>
 											<h3>{monthName}</h3>
 											<p className={css.updateRespData}>User: {user.user.fitbitName}</p>
 											<p className={css.updateRespData}>
@@ -91,12 +91,16 @@ class Dashboard extends React.Component<IProps, IState> {
 							tokensUpdated.length &&
 							tokensUpdated.map((data: any, i: any) => {
 								return (
-									<div key={i}>
+									<div className={css.dataBlock} key={i}>
 										<p className={css.updateRespData}>User: {data.userName}</p>
-										<p className={css.updateRespData}>Success: {'false'}</p>
 										<p className={css.updateRespData}>
-											Reason: {data.reason === 'token' ? 'Refresh token' : 'Unknown'}
+											Success: {data.success ? 'true' : 'false'}
 										</p>
+										{data.reason && (
+											<p className={css.updateRespData}>
+												Reason: {data.reason === 'token' ? 'Refresh token' : 'Unknown'}
+											</p>
+										)}
 									</div>
 								);
 							})}
