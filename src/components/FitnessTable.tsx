@@ -33,11 +33,6 @@ interface IUserTableData {
 	profileImgUrl: string;
 }
 
-// TODO: refactor to add in all the types. e.g. fitbitData in props. this can be re-used in the homr and auth-fb pages. also maybe server.
-// do find and replace for "any" on all pages. then make a button in adminland to refresh data using the api endpoint I made beofree, and create cron to update this each day
-// then refactor to make pages and components leaner
-// then STYLE
-
 class FitnessTable extends React.Component<IProps, IState> {
 	constructor(props: any) {
 		super(props);
@@ -85,9 +80,8 @@ class FitnessTable extends React.Component<IProps, IState> {
 					userDetails: userData.fbData
 				};
 			})
-			// TODO:sort and add crown image, and search for othet trodos
 			.sort((a, b) => {
-				return  b.steps - a.steps;
+				return b.steps - a.steps;
 			});
 		this.setState({
 			userData
@@ -159,6 +153,9 @@ class FitnessTable extends React.Component<IProps, IState> {
 							return (
 								<div key={i} className={`${css.tableRow}`}>
 									<div className={`${css.tableCell} ${css.firstCell}`}>
+										{i == 0 && (
+											<img className={`${css.crown}`} src="/static/icons/crown.svg" />
+										)}
 										<span>{userData.userDetails.first}</span>
 										<div className={css.tableImageWrap}>
 											<img src={userData.userDetails.profileImgUrl} />
