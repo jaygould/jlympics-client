@@ -15,17 +15,18 @@ interface IProps {
 
 interface IState {
 	dataUpdated: any;
+	tokensUpdated: any;
 }
 
 class Dashboard extends React.Component<IProps, IState> {
 	constructor() {
 		super();
-		this.state = { dataUpdated: null };
+		this.state = { dataUpdated: null, tokensUpdated: null };
 	}
 
 	render() {
 		const { globalStatus } = this.props;
-		const { dataUpdated } = this.state;
+		const { dataUpdated, tokensUpdated } = this.state;
 
 		return (
 			<div>
@@ -38,7 +39,7 @@ class Dashboard extends React.Component<IProps, IState> {
 							fitbitService.getAllUsersFitbitData().then(resp => {
 								if (resp.success) {
 									globalStatus.addMessage('Success!');
-									this.setState({ dataUpdated: resp.updated });
+									this.setState({ tokensUpdated: null, dataUpdated: resp.updated });
 								} else {
 									globalStatus.addMessage('Something went wrong.');
 								}
@@ -54,6 +55,7 @@ class Dashboard extends React.Component<IProps, IState> {
 							fitbitService.refreshFitbitTokens().then(resp => {
 								if (resp.success) {
 									globalStatus.addMessage('Success!');
+									this.setState({ dataUpdated: null, tokensUpdated: resp.response });
 								} else {
 									globalStatus.addMessage('Something went wrong.');
 								}
@@ -84,6 +86,19 @@ class Dashboard extends React.Component<IProps, IState> {
 										</div>
 									);
 								});
+							})}
+						{tokensUpdated &&
+							tokensUpdated.length &&
+							tokensUpdated.map((data: any, i: any) => {
+								return (
+									<div key={i}>
+										<p className={css.updateRespData}>User: {data.userName}</p>
+										<p className={css.updateRespData}>Success: {'false'}</p>
+										<p className={css.updateRespData}>
+											Reason: {data.reason === 'token' ? 'Refresh token' : 'Unknown'}
+										</p>
+									</div>
+								);
 							})}
 					</div>
 				</main>
