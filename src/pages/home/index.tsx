@@ -25,6 +25,8 @@ class Home extends React.Component<IProps, {}> {
 			return { query: ctx.query, fitbitData: null, currentMonth: null };
 		}
 		const currentMonth = new Date().getMonth();
+		console.log(currentMonth);
+		console.log(fitbitData);
 		return { query: ctx.query, fitbitData, currentMonth };
 	}
 	render() {
@@ -33,7 +35,7 @@ class Home extends React.Component<IProps, {}> {
 			<React.Fragment>
 				<Header />
 				<main>
-					{fitbitData && currentMonth ? (
+					{fitbitData && currentMonth >= 0 ? (
 						<FitnessTable fitbitData={fitbitData} currentMonth={currentMonth} />
 					) : (
 						<p>There is no data to view. There may be a server connection problem.</p>
