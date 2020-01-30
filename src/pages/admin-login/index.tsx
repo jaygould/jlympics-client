@@ -64,9 +64,6 @@ function AdminLogin(props: IProps) {
 						</Form>
 					)}
 				/>
-				<Link href="/register">
-					<a className={css.regLink}>Register</a>
-				</Link>{' '}
 			</main>
 		</div>
 	);

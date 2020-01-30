@@ -25,9 +25,8 @@ class Home extends React.Component<IProps, {}> {
 			return { query: ctx.query, fitbitData: null, currentMonth: null };
 		}
 		const currentMonth = new Date().getMonth();
-		console.log(currentMonth);
-		console.log(fitbitData);
-		return { query: ctx.query, fitbitData, currentMonth };
+
+    return { query: ctx.query, fitbitData, currentMonth };
 	}
 	render() {
 		const { fitbitData, currentMonth } = this.props;
